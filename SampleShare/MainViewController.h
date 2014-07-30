@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Debasish. All rights reserved.
 //
 
-#import "FlipsideViewController.h"
+#import <Social/Social.h>
+#import "Facebook.h"
+#import "MBProgressHUD.h"
+@interface MainViewController : UIViewController<MBProgressHUDDelegate>
 
-@interface MainViewController : UIViewController <FlipsideViewControllerDelegate, UIPopoverControllerDelegate>
-
-@property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
-
+@property (retain,nonatomic) MBProgressHUD *HUD;
+@property(nonatomic,strong)NSString *strFaaceBookAcessToken;
+- (IBAction)buttonSharePressed:(id)sender;
 @end

@@ -9,9 +9,37 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize _session;
+@synthesize facebook;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    if([[UIDevice currentDevice]userInterfaceIdiom]==UIUserInterfaceIdiomPhone)
+    {
+        if ([[UIScreen mainScreen] bounds].size.height == 568.0f)
+        {
+            self.mainVC = [[MainViewController alloc] initWithNibName:@"MainView_iPhone" bundle:nil];
+        }
+        else
+        {
+            //iphone 3.5 inch screen
+            self.mainVC = [[MainViewController alloc] initWithNibName:@"MainView_iPhone" bundle:nil];
+        }
+    }
+    else
+    {
+        //[ipad]
+        self.mainVC = [[MainViewController alloc] initWithNibName:@"MainView_iPad" bundle:nil];
+    }
+    
+    self.navigation=[[UINavigationController alloc]initWithRootViewController:self.mainVC];
+
+    self.window.rootViewController = _navigation;
+    [self.window makeKeyAndVisible];
+
     // Override point for customization after application launch.
     return YES;
 }

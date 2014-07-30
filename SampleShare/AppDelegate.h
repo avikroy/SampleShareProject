@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MainViewController.h"
+#import "Facebook.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
+{
+    FBSession *_session;
+    Facebook *facebook;
 
+}
 @property (strong, nonatomic) UIWindow *window;
+@property(strong,nonatomic)MainViewController *mainVC;
+@property (nonatomic, strong)  FBSession *_session;
+@property (nonatomic, strong)  Facebook *facebook;
+@property(nonatomic,strong)UINavigationController *navigation;
 
 @end
