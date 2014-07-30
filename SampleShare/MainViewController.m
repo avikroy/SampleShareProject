@@ -82,33 +82,39 @@ static NSString* kAppId = @"1428956924009830";
     
     if (isNetworkAvailable())
     {
-        FBSessionLoginBehavior behavior = FBSessionLoginBehaviorForcingWebView;
-        FBSessionTokenCachingStrategy *tokenCachingStrategy  = [self createCachingStrategy];
-        
-        NSArray *permissions = [[NSArray alloc] initWithObjects:
-                                @"email",@"user_photos",@"publish_stream",
-                                nil];
-        
-        appDelegate._session = [[FBSession alloc] initWithAppID:kAppId
-                                                    permissions:permissions
-                                                urlSchemeSuffix:nil
-                                             tokenCacheStrategy:tokenCachingStrategy];
-        
-        appDelegate.facebook.accessToken =  [FBSession activeSession].accessToken;
-        appDelegate.facebook.expirationDate = [FBSession activeSession].expirationDate;
-        [FBSession setActiveSession: appDelegate._session];
-        
-        [appDelegate._session openWithBehavior:behavior
-                             completionHandler:^(FBSession *session,
-                                                 FBSessionState status,
-                                                 NSError *error) {
-                                 
-                                 if (error) {
+        if (appDelegate._session.isOpen){
+            [self updateForSessionChange];
+
+        }else{
+            FBSessionLoginBehavior behavior = FBSessionLoginBehaviorForcingWebView;
+            FBSessionTokenCachingStrategy *tokenCachingStrategy  = [self createCachingStrategy];
+            
+            NSArray *permissions = [[NSArray alloc] initWithObjects:
+                                    @"email",@"user_photos",@"publish_stream",
+                                    nil];
+            
+            appDelegate._session = [[FBSession alloc] initWithAppID:kAppId
+                                                        permissions:permissions
+                                                    urlSchemeSuffix:nil
+                                                 tokenCacheStrategy:tokenCachingStrategy];
+            
+            appDelegate.facebook.accessToken =  [FBSession activeSession].accessToken;
+            appDelegate.facebook.expirationDate = [FBSession activeSession].expirationDate;
+            [FBSession setActiveSession: appDelegate._session];
+            
+            [appDelegate._session openWithBehavior:behavior
+                                 completionHandler:^(FBSession *session,
+                                                     FBSessionState status,
+                                                     NSError *error) {
                                      
-                                 }
-                                 
-                                 [self updateForSessionChange];
-                             }];
+                                     if (error) {
+                                         
+                                     }
+                                     
+                                     [self updateForSessionChange];
+                                 }];
+        }
+        
         
     }
     else
@@ -117,6 +123,7 @@ static NSString* kAppId = @"1428956924009830";
     }
 }
 - (void)updateForSessionChange {
+
     
     self.strFaaceBookAcessToken=  [FBSession activeSession].accessToken;
     
