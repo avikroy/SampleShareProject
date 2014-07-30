@@ -24,7 +24,7 @@ static NSString* kAppId = @"1428956924009830";
     [super viewDidLoad];
   
     [self createHUD]; // create hud
-    appDelegate=(AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate=[[UIApplication sharedApplication] delegate];
 
 	// Do any additional setup after loading the view, typically from a nib.
 }
