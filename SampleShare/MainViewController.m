@@ -22,7 +22,10 @@ static NSString* kAppId = @"1428956924009830";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  
+    
+    NSTimeZone *zone=[NSTimeZone localTimeZone];
+    
+    
     [self createHUD]; // create hud
     appDelegate=[[UIApplication sharedApplication] delegate];
 
